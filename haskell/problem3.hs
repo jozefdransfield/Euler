@@ -11,15 +11,15 @@ main = do {
 	print (primeFactors 600851475143)
 }
 
-lowestDivisor x = find (\n -> (mod x n) == 0) primes
+lowestDivisor x = find (\n -> (mod x n) == 0) (take 1000 primes)
 
 primeFactors x = 
 	let v = lowestDivisor x
 		in if isJust v then primeFactors(div x (fromJust v)) ++ [(fromJust v)]  else []
 
 
-primes = let y = [x | x <- [1..], isPrime x] in take 10000 y 
+primes = [x | x <- [2..], isPrime x]
 
 isPrime 2 = True
 isPrime 3 = True
-isPrime x = if isJust (find (\n -> (mod x n) == 0) [x..3]) then True else False
+isPrime x = if isJust (find (\n -> (mod x n) == 0) [2..(x-1)]) then False else True
